@@ -1,0 +1,219 @@
+Overview of the Code
+
+This is a React-based application that serves as an expense tracker. It allows users to add new transactions, view their transaction log, and see the total amount of money they have given or taken.
+
+Breakdown of the Code
+
+Importing Dependencies
+The code starts by importing the necessary dependencies:
+
+javascript
+Insert Code
+Copy code
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./App.css";
+React is the main library for building user interfaces.
+useState and useEffect are hooks provided by React to manage state and side effects, respectively.
+axios is a library used for making HTTP requests to the backend API.
+./App.css is a CSS file that styles the application.
+Defining the App Component
+The App component is defined as a functional component:
+
+javascript
+Insert Code
+Copy code
+const App = () => {
+// ...
+};
+This is a common pattern in React, where components are defined as functions that return JSX elements.
+
+State Management with useState
+The App component uses the useState hook to manage its state:
+
+javascript
+Insert Code
+Copy code
+const [transactions, setTransactions] = useState([]);
+const [description, setDescription] = useState("");
+const [amount, setAmount] = useState(0);
+const [type, setType] = useState("give");
+transactions is an array that stores the transaction log.
+description, amount, and type are used to store the input values for adding a new transaction.
+The useState hook returns an array with two elements: the current state value and a function to update that state value.
+Fetching Data with useEffect and Axios
+The useEffect hook is used to fetch the transaction log from the backend API when the component mounts:
+
+javascript
+Insert Code
+Copy code
+useEffect(() => {
+axios
+.get("http://127.0.0.1:8000/api/expenses/")
+.then((response) => setTransactions(response.data))
+.catch((error) => console.error("Error fetching transactions:", error));
+}, []);
+The useEffect hook takes two arguments: a function to run when the component mounts, and an array of dependencies.
+In this case, the function makes a GET request to the backend API using axios.
+The response data is then used to update the transactions state.
+The empty dependency array [] means that the effect will only run once, when the component mounts.
+Adding New Transactions
+The handleTransaction function is used to add new transactions:
+
+javascript
+Insert Code
+Copy code
+const handleTransaction = () => {
+const newTransaction = {
+description,
+amount: type === "give" ? -amount : amount,
+type,
+user: 1, // Change this according to your user setup
+date: new Date().toISOString().split("T")[0],
+};
+
+axios
+.post("http://127.0.0.1:8000/api/expenses/", newTransaction)
+.then((response) => {
+setTransactions([...transactions, response.data]);
+setDescription("");
+setAmount(0);
+setType("give");
+})
+.catch((error) => console.error("Error adding transaction:", error));
+};
+The function creates a new transaction object based on the input values.
+It then makes a POST request to the backend API using axios.
+The response data is used to update the transactions state and reset the input values.
+Rendering the UI
+The App component renders the UI using JSX:
+
+javascript
+Insert Code
+Copy code
+return (
+
+  <div className="App">
+    <header className="App-header">
+      <h1>Expense Tracker</h1>
+    </header>
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-md-6">
+          <div className="transaction-log">
+            <h2>Transaction Log</h2>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Sr. No.</th>
+                  <th>Description</th>
+                  <th>Amount</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                {transactions.map((tx, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{tx.description}</td>
+                    <td>Rs.{tx.amount}</td>
+                    <td>
+                      {tx.type.charAt(0).toUpperCase() + tx.type.slice(1)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="container">
+            <div className="columns">
+              <div className="column">
+                <h2>I Got</h2>
+                <p>
+                  Rs.
+                  {transactions?.length
+                    ? transactions
+                        .filter(
+                          (tx) =>
+                            (tx.type === "give" && Number(tx.amount)) || 0
+                        )
+                        .reduce((total, tx) => total + Number(tx.amount), 0)
+                        .toFixed(2)
+                    : "Loading..."}
+                </p>
+              </div>
+              <div className="column">
+                <h2>I Give</h2>
+                <p>
+                  Rs.
+                  {transactions?.length
+                    ? transactions
+                        .filter(
+                          (tx) =>
+                            (tx.type === "take" && Number(tx.amount)) || 0
+                        )
+                        .reduce((total, tx) => total + Number(tx.amount), 0)
+                        .toFixed(2)
+                    : "Loading..."}
+                </p>
+              </div>
+            </div>
+            <div className="input-form">
+              <h2>Add Transaction</h2>
+              <input
+                type="text"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Description"
+              />
+              <input
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(Number(e.target.value))}
+                placeholder="Amount"
+              />
+              <div className="btn-group">
+                <button className="give-btn" onClick={() => setType("give")}>
+                  Give
+                </button>
+                <button className="take-btn" onClick={() => setType("take")}>
+                  Take
+                </button>
+              </div>
+              <button className="add-btn" onClick={handleTransaction}>
+                Add Transaction
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+The UI is divided into two main sections: the transaction log and the input form.
+The transaction log displays the list of transactions, with columns for description, amount, and type.
+The input form allows users to add new transactions, with fields for description, amount, and type.
+Why Use Axios?
+
+Axios is used to make HTTP requests to the backend API because it provides a simple and intuitive way to handle requests and responses. It also provides features such as:
+
+Automatic JSON data parsing
+Automatic header setting
+Support for promises and async/await
+Support for canceling requests
+Why Use useState and useEffect?
+
+useState and useEffect are used to manage state and side effects in the component because they provide a simple and intuitive way to handle state changes and side effects. They also provide features such as:
+
+Automatic state updates
+Automatic side effect handling
+Support for functional components
+Why Put const App and Other?
+
+The const App syntax is used to define a functional component because it provides a simple and intuitive way to define components. The const keyword is used to declare a constant variable, and the App variable holds the function that defines the component. This approach allows for better readability and maintainability of the code.
+
+Conclusion
+
+This code effectively implements an expense tracker using React, leveraging hooks for state management and side effects, and Axios for API communication. The structure is modular, making it easy to understand and extend in the future. The use of functional components and hooks aligns with modern React practices, promoting a clean and efficient coding style.
