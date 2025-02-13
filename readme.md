@@ -151,6 +151,12 @@ npm start
   - Docker (optional)
   - CI/CD Pipeline (GitHub Actions, optional)
 
+## Screen Shot
+  - Frontend main Page
+![Alt text](https://raw.githubusercontent.com/Haroon966/Expense-Tracker-Project/refs/heads/main/main%20page%20(Front%20Page).png "Frontend main Page")
+  - Backend admin Page
+![Alt text](https://raw.githubusercontent.com/Haroon966/Expense-Tracker-Project/refs/heads/main/admin%20panel%20(backend).png "Frontend main Page")
+
 ## Contributors
 
 - **Haroon Ali** - Project Maintainer & Developer
