@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The **Expense Tracker Project** is a powerful financial management system designed to help individuals and businesses efficiently track their **expenses, incomes, debts, and credits**. Built with **Django** (backend) and **React** (frontend), it provides a seamless and user-friendly experience for managing finances. The system allows users to monitor their financial activities, generate insightful reports, and make informed financial decisions.
+The **Expense Tracker Project** is a powerful financial management system designed to help individuals and businesses efficiently track their **expenses**. Built with **Django** (backend) and **React** (frontend), it provides a seamless and user-friendly experience for managing finances. The system allows users to monitor their financial activities, generate insightful reports, and make informed financial decisions.
 
 ## System Requirements
 
@@ -15,7 +15,6 @@ To run the project smoothly, ensure your system meets the following requirements
 - **React**: Version 17.0 or higher
 - **Node.js**: Version 14.17 or higher
 - **npm**: Version 6.14 or higher
-- **Database**: SQLite (default) or PostgreSQL/MySQL (optional)
 
 ## Project Structure
 
@@ -47,8 +46,8 @@ The project is structured into two main components:
 
 - **Interactive Dashboard**: Provides an overview of financial data.
 - **Real-time Expense Tracking**: Easily add, update, and delete transactions.
-- **Filter & Sort Functionality**: Helps users manage transactions efficiently.
-- **Data Visualization**: Graphs and charts for better financial insights.
+- **Filter & Sort Functionality**: Helps users manage transactions efficiently. (Coming soon)
+- **Data Visualization**: Graphs and charts for better financial insights. (Coming soon)
 - **Mobile-Friendly Design**: Fully responsive for all devices.
 
 ## API Endpoints
@@ -60,30 +59,6 @@ The project is structured into two main components:
 - `GET /api/expenses/:pk/` - Retrieve a specific expense.
 - `PUT /api/expenses/:pk/` - Update a specific expense.
 - `DELETE /api/expenses/:pk/` - Delete a specific expense.
-
-### Incomes
-
-- `GET /api/incomes/` - Retrieve all incomes.
-- `POST /api/incomes/` - Create a new income.
-- `GET /api/incomes/:pk/` - Retrieve a specific income.
-- `PUT /api/incomes/:pk/` - Update a specific income.
-- `DELETE /api/incomes/:pk/` - Delete a specific income.
-
-### Debts
-
-- `GET /api/debts/` - Retrieve all debts.
-- `POST /api/debts/` - Create a new debt.
-- `GET /api/debts/:pk/` - Retrieve a specific debt.
-- `PUT /api/debts/:pk/` - Update a specific debt.
-- `DELETE /api/debts/:pk/` - Delete a specific debt.
-
-### Credits
-
-- `GET /api/credits/` - Retrieve all credits.
-- `POST /api/credits/` - Create a new credit.
-- `GET /api/credits/:pk/` - Retrieve a specific credit.
-- `PUT /api/credits/:pk/` - Update a specific credit.
-- `DELETE /api/credits/:pk/` - Delete a specific credit.
 
 ## Installation Guide
 
@@ -148,11 +123,11 @@ npm start
      - **Dashboard**: Overview of financial data.
      - **Expenses**: Add, edit, or delete expenses.
 
-4. **Filter & Sort Transactions**:
+4. **Filter & Sort Transactions**:(Coming Soon)
 
    - Use search, filters, and sorting options to find specific transactions.
 
-5. **Visualizing Financial Data**:
+5. **Visualizing Financial Data**: (Coming Soon)
    - Check graphs and charts for financial insights.
 
 ## Tools & Technologies Used
